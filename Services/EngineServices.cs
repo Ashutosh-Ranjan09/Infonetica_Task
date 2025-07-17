@@ -2,7 +2,6 @@ using System.Net;
 using System.Linq;
 using Engine.Models;
 namespace Engine.Services;
-
 public static class EngineServices
 {
     public static Dictionary<string, Definition> Definitions = new();
@@ -42,7 +41,7 @@ public static class EngineServices
             throw new Exception("Cannot transition from a final state");
 
         inst.CurrentState = newState.Id;
-        inst.History.Add((action.Id,DateTime.UtcNow));
+        inst.History.Add(new Instance.HistoryEntry { ActionId = action.Id, Timestamp = DateTime.UtcNow });
         return inst;
     }
 
